@@ -3,3 +3,13 @@
 
 
 SUMWHERE server private copy to public sample
+
+### Stack
+- echo 
+- kubernetes
+- mysql
+- rabbitmq
+- redis
+- helm(cert-manager)
+- helm(metallb)
+- helm(nfs-client dynamic provisioning)
