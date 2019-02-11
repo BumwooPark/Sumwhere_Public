@@ -1,0 +1,33 @@
+language: go
+
+env:
+  global:
+    - GO111MODULE=on
+    - CODECOV_TOKEN=f4fddcbc-32a4-4c55-94fc-f6b04ddc5e18
+
+services:
+  - docker
+
+os:
+  - linux
+
+go:
+  - 1.11.x
+
+before_script:
+  - make clean
+
+script:
+  - go test -race -coverprofile=coverage.txt -covermode=atomic $(go list ./...)
+  - make sumwhere
+  - make docker-build
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+  - make push
+
+deploy:
+  provider: script
+  script: make rolling-update
+  on:
+    branch: master
