@@ -1,9 +1,9 @@
 GOCMD=go
 GOBUILD=$(GOCMD) build
 GOCLEAN=$(GOCMD) clean
-IMAGE=qkrqjadn/sumwhere
-DOCKER_PASSWORD=1q2w3e4r
-DOCKER_USERNAME=qkrqjadn
+IMAGE=NAME/sumwhere
+DOCKER_PASSWORD=PASSWORD
+DOCKER_USERNAME=NAME
 VERSION=1.0
 GITCOMMITCOUNT:=$$(git rev-list HEAD | wc -l | tr -d ' ')
 GITHASH:=$$(git rev-parse --short HEAD)
@@ -23,7 +23,7 @@ docker-build:
 	@docker build -t $(IMAGE):$(VERSIONS) .
 
 rolling-update:
-	ssh root@changeme -p 55555 kubectl set image deployment/sumwhere-server sumwhere-server=$(IMAGE):$(VERSIONS) -n sumwhere
+	ssh root@CHANGEME -p 55555 kubectl set image deployment/sumwhere-server sumwhere-server=$(IMAGE):$(VERSIONS) -n sumwhere
 
 push:
 	@echo $(DOCKER_PASSWORD) | docker login -u $(DOCKER_USERNAME) --password-stdin
